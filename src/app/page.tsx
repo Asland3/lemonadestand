@@ -10,7 +10,7 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-20 lg:items-center lg:justify-between">
             <div>
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl/none lg:text-6xl/none lg:leading-tight">
-                Welcome to Acme Cocktails
+                Welcome to Malthes Cocktails
               </h1>
               <p className="max-w-[600px] mt-6 text-base text-gray-500 md:text-xl dark:text-gray-400 lg:text-base/each lg:mt-4">
                 We craft the finest cocktails for your enjoyment. Let us delight
@@ -58,7 +58,7 @@ export default function Home() {
             alt="Image"
             className="aspect-square object-cover rounded-xl"
             height="400"
-            src="/placeholder.svg"
+            src="/strawberry.jpg"
             width="400"
           />
         </div>
@@ -67,7 +67,7 @@ export default function Home() {
             alt="Image"
             className="aspect-square object-cover rounded-xl"
             height="400"
-            src="/placeholder.svg"
+            src="/Passion.jpg"
             width="400"
           />
         </div>

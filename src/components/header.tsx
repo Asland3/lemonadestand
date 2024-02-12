@@ -26,7 +26,7 @@ function Header() {
         <Link href="#">About Us</Link>
         <Link href="#">Contact</Link>
       </nav>
-      <div className="ml-auto flex items-center space-x-8">
+      <div className="ml-auto flex items-center space-x-6">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
@@ -48,7 +48,7 @@ function Header() {
           </DropdownMenuContent>
         </DropdownMenu>
         <Link className="text-gray-500 dark:text-gray-400" href="#">
-          <ShoppingCartIcon className="w-6 h-6" />
+          <ShoppingCartIcon className="w-6 h-6 hover:text-black dark:hover:text-white transition" />
         </Link>
       </div>
     </header>
