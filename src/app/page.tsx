@@ -37,8 +37,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="grid gap-6 lg:grid-cols-2 xl:gap-12 bg-gray-100 py-12 px-4 dark:bg-gray-950 lg:px-6">
-        <div className="flex flex-col justify-between space-y-2">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gray-100 py-12 px-4 dark:bg-gray-950 lg:px-6">
+        <div className="flex flex-col gap-5 ">
           <div className="space-y-2">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
               Margarita
@@ -48,21 +49,78 @@ export default function Home() {
               tequila.
             </p>
           </div>
+
+          <div className="">
+            <Image
+              alt="Image"
+              className="aspect-square object-cover rounded-xl"
+              height="400"
+              src="/strawberry.jpg"
+              width="400"
+            />
+          </div>
+
           <div className="flex items-end space-x-4">
             <span className="text-2xl font-bold">$10.00</span>
             <Button size="sm">Add to Cart</Button>
           </div>
         </div>
-        <div className="flex items-center justify-center">
-          <Image
-            alt="Image"
-            className="aspect-square object-cover rounded-xl"
-            height="400"
-            src="/strawberry.jpg"
-            width="400"
-          />
+
+        <div className="flex flex-col gap-5 ">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+              Margarita
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              The classic Margarita is a perfect balance of sweet, sour, and
+              tequila.
+            </p>
+          </div>
+
+          <div className="">
+            <Image
+              alt="Image"
+              className="aspect-square object-cover rounded-xl"
+              height="400"
+              src="/strawberry.jpg"
+              width="400"
+            />
+          </div>
+
+          <div className="flex items-end space-x-4">
+            <span className="text-2xl font-bold">$10.00</span>
+            <Button size="sm">Add to Cart</Button>
+          </div>
         </div>
-        <div className="flex items-center justify-center">
+
+        <div className="flex flex-col gap-5  ">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+              Margarita
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              The classic Margarita is a perfect balance of sweet, sour, and
+              tequila.
+            </p>
+          </div>
+
+          <div className="">
+            <Image
+              alt="Image"
+              className="aspect-square object-cover rounded-xl"
+              height="400"
+              src="/strawberry.jpg"
+              width="400"
+            />
+          </div>
+
+          <div className="flex items-end space-x-4">
+            <span className="text-2xl font-bold">$10.00</span>
+            <Button size="sm">Add to Cart</Button>
+          </div>
+        </div>
+
+        {/* <div className="flex items-center justify-center">
           <Image
             alt="Image"
             className="aspect-square object-cover rounded-xl"
@@ -85,7 +143,7 @@ export default function Home() {
             <span className="text-2xl font-bold">$12.00</span>
             <Button size="sm">Add to Cart</Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   );

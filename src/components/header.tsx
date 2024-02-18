@@ -12,6 +12,15 @@ import {
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from "next/image";
 
 function Header() {
   const { setTheme } = useTheme();
@@ -47,9 +56,53 @@ function Header() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Link className="text-gray-500 dark:text-gray-400" href="#">
-          <ShoppingCartIcon className="w-6 h-6 hover:text-black dark:hover:text-white transition" />
-        </Link>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <ShoppingCartIcon className="w-6 h-6 hover:text-black dark:hover:text-white transition" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <Card>
+              <CardHeader>
+                <CardTitle>Card</CardTitle>
+              </CardHeader>
+              <CardContent className="flex justify-between items-center">
+                <div>
+                  <p className="text-gray-500 dark:text-gray-400 mb-2">
+                    Margarita
+                  </p>
+                  <div className="flex flex-row">
+                    <div className="overflow-hidden rounded-xl shadow-lg w-full lg:w-auto">
+                      <Image
+                        alt="Image"
+                        className="object-cover"
+                        height="70"
+                        src="/drinkingCocktail.jpg"
+                        width="70"
+                      />
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center ml-3">
+                      <p className="font-bold">$10.00</p>
+                      <div className=" mt-2">
+                        <button>-</button>
+                        <span className="mx-2">1</span>
+                        <button>+</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="flex flex-col justify-center">
+                <p className="font-bold mb-2">Total: $10.00</p>
+
+                <Button>Go to Cart</Button>
+              </CardFooter>
+            </Card>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
