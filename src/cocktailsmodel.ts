@@ -1,0 +1,29 @@
+export interface CocktailsModel {
+  idDrink: string;
+  strDrink: string;
+  strCategory: string;
+  strAlcoholic: string;
+  strGlass: string;
+  strDescription: string;
+  strPrice: string;
+  strInstructions: string;
+  strDrinkThumb: string;
+  strIngredient1: string;
+  strIngredient2: string;
+  strIngredient3?: string;
+  strIngredient4?: string;
+  strIngredient5?: string;
+  strMeasure1: string;
+  strMeasure2: string;
+  strMeasure3?: string;
+  strMeasure4?: string;
+  strCreativeCommonsConfirmed: string;
+  dateModified?: string;
+  strTags?: string;
+  strIBA?: string;
+  strMeasure5?: string;
+  strImageSource?: string;
+  strImageAttribution?: string;
+  strDrinkAlternate?: any;
+  strVideo?: any;
+}
