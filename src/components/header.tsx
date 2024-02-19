@@ -79,7 +79,7 @@ function Header() {
                         alt="Image"
                         className="object-cover"
                         height="70"
-                        src="/drinkingCocktail.jpg"
+                        src="/strawberry.jpg"
                         width="70"
                       />
                     </div>
