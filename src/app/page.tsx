@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import cocktailsData from "@/lib/cocktials.json";
+import useCart from "@/hooks/use-cart";
 
 export default function Home() {
   const [cocktails, setCocktails] = useState<CocktailsModel[]>([]);
@@ -13,6 +14,12 @@ export default function Home() {
     setCocktails(cocktailsData.cocktailsData);
     console.log(cocktailsData.cocktailsData);
   }, []);
+
+  const cart = useCart();
+
+  const onAddtoCart = (cocktail: CocktailsModel) => {
+    cart.addItem(cocktail);
+  }
 
   return (
     <main className="flex-1">
@@ -23,21 +30,6 @@ export default function Home() {
               <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl/none lg:text-6xl/none lg:leading-tight">
                 Welcome to Malthes Cocktails
               </h1>
-
-              {/* <div>
-                {cocktails.map((cocktail, index) => (
-                  <div key={index}>
-                    <h2>{cocktail.strCategory}</h2>
-                    <p>{cocktail.strDrinkAlternate}</p>
-                    <Image
-                      src={cocktail.strDrinkThumb!}
-                      alt={cocktail.strDrink!}
-                      width={500}
-                      height={300}
-                    />
-                  </div>
-                ))}
-              </div> */}
 
               <p className="max-w-[600px] mt-6 text-base text-gray-500 md:text-xl dark:text-gray-400 lg:text-base/each lg:mt-4">
                 We craft the finest cocktails for your enjoyment. Let us delight
@@ -71,10 +63,7 @@ export default function Home() {
       </div>
 
       <div className="flex justify-center bg-gray-100 py-12 dark:bg-gray-950 lg:px-6">
-        <div
-          id="cocktails"
-          className="grid grid-cols-1 md:grid-cols-3 gap-32 "
-        >
+        <div id="cocktails" className="grid grid-cols-1 md:grid-cols-3 gap-32 ">
           {cocktails.map((cocktail) => (
             <div key={cocktail.idDrink} className="flex flex-col gap-5">
               <div className="space-y-2">
@@ -100,66 +89,12 @@ export default function Home() {
                 <span className="text-2xl font-bold">
                   {cocktail.strPrice} $
                 </span>
-                <Button size="sm">Add to Cart</Button>
+                <Button size="sm" onClick={() => onAddtoCart(cocktail)}>Add to Cart</Button>
               </div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* <div className="flex flex-col gap-5 ">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-              Margarita
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">
-              The classic Margarita is a perfect balance of sweet, sour, and
-              tequila.
-            </p>
-          </div>
-
-          <div className="">
-            <Image
-              alt="Image"
-              className="aspect-square object-cover rounded-xl"
-              height="400"
-              src="/strawberry.jpg"
-              width="400"
-            />
-          </div>
-
-          <div className="flex items-end space-x-4">
-            <span className="text-2xl font-bold">$10.00</span>
-            <Button size="sm">Add to Cart</Button>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-5  ">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-              Margarita
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">
-              The classic Margarita is a perfect balance of sweet, sour, and
-              tequila.
-            </p>
-          </div>
-
-          <div className="">
-            <Image
-              alt="Image"
-              className="aspect-square object-cover rounded-xl"
-              height="400"
-              src="/strawberry.jpg"
-              width="400"
-            />
-          </div>
-
-          <div className="flex items-end space-x-4">
-            <span className="text-2xl font-bold">$10.00</span>
-            <Button size="sm">Add to Cart</Button>
-          </div>
-        </div> */}
     </main>
   );
 }
