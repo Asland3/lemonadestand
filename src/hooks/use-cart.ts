@@ -26,7 +26,7 @@ const useCart = create(
           const newItems = [...currentItems];
           newItems[existingItemIndex].quantity! += 1;
           set({ items: newItems });
-          toast.success(`Increased quantity of ${data.strDrink} in your cart`, {
+          toast.success(`${data.strDrink} has been added to your cart`, {
             position: "top-center",
           });
         } else {
@@ -48,11 +48,10 @@ const useCart = create(
       },
       removeAll: () => set({ items: [] }),
       totalPrice: () =>
-      get().items.reduce(
-        (total, item) => total + parseFloat(item.strPrice!) * item.quantity!,
-        0
-      ),
-    
+        get().items.reduce(
+          (total, item) => total + parseFloat(item.strPrice!) * item.quantity!,
+          0
+        ),
     }),
     {
       name: "cart-storage",
