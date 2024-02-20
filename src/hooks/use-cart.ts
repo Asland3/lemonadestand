@@ -15,7 +15,6 @@ const useCart = create(
     (set, get) => ({
       items: [],
       addItem: (data: CocktailsModel) => {
-        debugger;
         const currentItems = get().items;
         const existingItem = currentItems.find(
           (item) => item.idDrink === data.idDrink
