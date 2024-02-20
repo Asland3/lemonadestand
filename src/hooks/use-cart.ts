@@ -8,6 +8,7 @@ interface CartStore {
   addItem: (data: CocktailsModel) => void;
   removeItem: (id: string) => void;
   removeAll: () => void;
+  totalPrice: () => number;
 }
 
 const useCart = create(
@@ -16,22 +17,28 @@ const useCart = create(
       items: [],
       addItem: (data: CocktailsModel) => {
         const currentItems = get().items;
-        const existingItem = currentItems.find(
+        const existingItemIndex = currentItems.findIndex(
           (item) => item.idDrink === data.idDrink
         );
 
-        if (existingItem) {
-          // Add a toast here
-          toast.error(`${data.strDrink} is already in your cart`, {
+        if (existingItemIndex !== -1) {
+          // Increase the quantity of the existing item
+          const newItems = [...currentItems];
+          newItems[existingItemIndex].quantity! += 1;
+          set({ items: newItems });
+          toast.success(`Increased quantity of ${data.strDrink} in your cart`, {
+            position: "top-center",
+          });
+        } else {
+          // Add the new item to the cart
+          data.quantity = 1; // Initialize quantity
+          set({ items: [...currentItems, data] });
+          toast.success(`${data.strDrink} has been added to your cart`, {
             position: "top-center",
           });
         }
-
-        set({ items: [...get().items, data] });
-        toast.success(`${data.strDrink} has been added to your cart`, {
-          position: "top-center",
-        });
       },
+
       removeItem: (id: string) => {
         set({ items: [...get().items.filter((item) => item.idDrink !== id)] });
         // toast here
@@ -40,6 +47,12 @@ const useCart = create(
         });
       },
       removeAll: () => set({ items: [] }),
+      totalPrice: () =>
+      get().items.reduce(
+        (total, item) => total + parseFloat(item.strPrice!) * item.quantity!,
+        0
+      ),
+    
     }),
     {
       name: "cart-storage",

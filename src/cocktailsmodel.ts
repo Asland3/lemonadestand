@@ -26,4 +26,5 @@ export interface CocktailsModel {
   strImageAttribution?: string | null;
   strDrinkAlternate?: any;
   strVideo?: any;
+  quantity?: number;
 }

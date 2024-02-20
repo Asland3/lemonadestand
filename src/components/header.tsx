@@ -9,13 +9,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { MoonIcon, SunIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
 import {
-  Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -29,7 +27,7 @@ function Header() {
   const cart = useCart();
 
   return (
-    <header className="flex items-center h-14 border-b w-full lg:h-20 px-6 dark:bg-gray-900">
+    <header className="sticky top-0 z-50 flex items-center h-14 border-b w-full lg:h-20 px-6 bg-white dark:bg-gray-900">
       <nav className="hidden space-x-4 lg:flex">
         <Link className="font-semibold" href="#">
           Home
@@ -63,7 +61,17 @@ function Header() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
-              <ShoppingCartIcon className="w-6 h-6 hover:text-black dark:hover:text-white transition" />
+              <div className="relative">
+                <ShoppingCartIcon className="w-6 h-6 hover:text-black dark:hover:text-white transition" />
+                {cart.items.length > 0 && (
+                  <span className="absolute top-0 right-0 transform translate-x-4 -translate-y-1/2 inline-block px-1 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
+                    {cart.items.reduce(
+                      (total, item) => total + item.quantity!,
+                      0
+                    )}
+                  </span>
+                )}
+              </div>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -88,14 +96,17 @@ function Header() {
                       />
                     </div>
 
-                    <div className="flex flex-col items-center justify-center ml-3">
+                    <div className="flex items-center ml-3">
+                      <p className="mr-5">{item.quantity} x</p>
                       <p className="font-bold">{item.strPrice} $</p>
-                      <div className=" mt-2">
-                        <button onClick={() => cart.removeItem(item.idDrink!)}>
-                          -
-                        </button>
-                        <span className="mx-2">1</span>
-                        <button onClick={() => cart.addItem(item)}>+</button>
+                      <div className="ml-2">
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => cart.removeItem(item.idDrink!)}
+                        >
+                          <TrashIcon className="h-4 w-4" />
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -104,14 +115,12 @@ function Header() {
             ))}
 
             <CardFooter className="flex flex-col justify-center">
-              <p className="font-bold mb-2">Total: $10.00</p>
+              <p className="font-bold mb-2">Total: {cart.totalPrice()} $</p>
 
-              <Button>Go to Cart</Button>
+              <Button className="w-full">Go to Cart</Button>
             </CardFooter>
           </DropdownMenuContent>
         </DropdownMenu>
-
-        <p>Total amount {cart.items.length}</p>
       </div>
     </header>
   );
