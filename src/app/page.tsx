@@ -87,7 +87,7 @@ export default function Home() {
 
               <div className="flex items-end space-x-4">
                 <span className="text-2xl font-bold">
-                  {cocktail.strPrice} $
+                ${cocktail.strPrice} 
                 </span>
                 <Button size="sm" onClick={() => onAddtoCart(cocktail)}>Add to Cart</Button>
               </div>
