@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
 
-import Cart from "./cart";
 import ThemeDropdown from "./theme-dropdown";
+import CartDropdown from "./cart-dropdown";
 
 function Header() {
   return (
@@ -17,7 +17,7 @@ function Header() {
       </nav>
       <div className="ml-auto flex items-center space-x-4">
         <ThemeDropdown />
-        <Cart />
+        <CartDropdown />
       </div>
     </header>
   );

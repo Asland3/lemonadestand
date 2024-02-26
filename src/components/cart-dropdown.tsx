@@ -18,7 +18,7 @@ import {
 import Image from "next/image";
 import useCart from "@/hooks/use-cart";
 
-function Cart() {
+function CartDropdown() {
   const cart = useCart();
 
   return (
@@ -106,4 +106,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export default CartDropdown;
