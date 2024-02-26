@@ -8,7 +8,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="flex items-center h-14 border-t w-full lg:h-20 px-6 dark:bg-gray-900">
+    <footer className="flex items-center h-14 border-t w-full lg:h-20 px-6 dark:bg-gray-900 ">
       <p className="text-sm text-gray-500 dark:text-gray-400">
         © 2024 Malthe Cocktails. All rights reserved.
       </p>

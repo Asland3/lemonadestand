@@ -19,7 +19,7 @@ export default function Home() {
 
   const onAddtoCart = (cocktail: CocktailsModel) => {
     cart.addItem(cocktail);
-  }
+  };
 
   return (
     <main className="flex-1">
@@ -70,9 +70,7 @@ export default function Home() {
                 <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
                   {cocktail.strDrink}
                 </h2>
-                <p className="text-gray-500 dark:text-gray-400">
-                  {/* {cocktail.strDescription} */}
-                </p>
+                <p className="text-gray-500 dark:text-gray-400"></p>
               </div>
 
               <div className="">
@@ -86,10 +84,10 @@ export default function Home() {
               </div>
 
               <div className="flex items-end space-x-4">
-                <span className="text-2xl font-bold">
-                ${cocktail.strPrice} 
-                </span>
-                <Button size="sm" onClick={() => onAddtoCart(cocktail)}>Add to Cart</Button>
+                <span className="text-2xl font-bold">${cocktail.strPrice}</span>
+                <Button size="sm" onClick={() => onAddtoCart(cocktail)}>
+                  Add to Cart
+                </Button>
               </div>
             </div>
           ))}

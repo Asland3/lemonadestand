@@ -7,7 +7,7 @@ export interface CocktailsModel {
   strDescription: string | null;
   strPrice: string | null;
   strInstructions: string | null;
-  strDrinkThumb: string | null;
+  strDrinkThumb?: string | null;
   strIngredient1: string | null;
   strIngredient2: string | null;
   strIngredient3?: string | null;

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import useCart from "@/hooks/use-cart";
+import Link from "next/link";
 
 function CartDropdown() {
   const cart = useCart();
@@ -24,7 +25,11 @@ function CartDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button
+          variant="outline"
+          size="icon"
+          className="bg-white dark:bg-gray-900"
+        >
           <div className="relative">
             <ShoppingCartIcon className="w-6 h-6 hover:text-black dark:hover:text-white transition" />
             {cart.items.length > 0 && (
@@ -42,7 +47,7 @@ function CartDropdown() {
 
         {cart.items.length > 0 ? (
           <>
-            <CardContent className="p-0">
+            <CardContent className="p-0 ">
               <div className="flex flex-col">
                 {cart.items.map((item) => (
                   <div
@@ -90,10 +95,12 @@ function CartDropdown() {
             </CardContent>
             <CardFooter className="flex flex-col justify-center border-t pt-5">
               <p className="font-semibold mb-2">
-                Subtotal: ${cart.totalPrice()}{" "}
+                Subtotal: ${cart.subTotal()}{" "}
               </p>
 
-              <Button className="w-full">Checkout</Button>
+              <Button asChild className="w-full">
+                <Link href="/cart">Go to Cart</Link>
+              </Button>
             </CardFooter>
           </>
         ) : (

@@ -8,13 +8,20 @@ interface CartStore {
   addItem: (data: CocktailsModel) => void;
   removeItem: (id: string) => void;
   removeAll: () => void;
+  subTotal: () => number;
+  tax: () => number;
   totalPrice: () => number;
+  shippingCost: () => number;
 }
+
+const shipping = 5.0;
+const tax = 0.07;
 
 const useCart = create(
   persist<CartStore>(
     (set, get) => ({
       items: [],
+      shippingCost: () => shipping,
       addItem: (data: CocktailsModel) => {
         const currentItems = get().items;
         const existingItemIndex = currentItems.findIndex(
@@ -47,12 +54,15 @@ const useCart = create(
         });
       },
       removeAll: () => set({ items: [] }),
-      totalPrice: () =>
+      subTotal: () =>
         get().items.reduce(
           (total, item) => total + parseFloat(item.strPrice!) * item.quantity!,
           0
         ),
+      tax: () => get().subTotal() * tax,
+      totalPrice: () => get().subTotal() + shipping + get().tax(),
     }),
+
     {
       name: "cart-storage",
       storage: createJSONStorage(() => localStorage),
