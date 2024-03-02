@@ -48,7 +48,6 @@ const useCart = create(
 
       removeItem: (id: string) => {
         set({ items: [...get().items.filter((item) => item.idDrink !== id)] });
-        // toast here
         toast.error(`Item has been removed from your cart`, {
           position: "top-center",
         });
