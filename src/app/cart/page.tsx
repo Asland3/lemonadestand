@@ -19,7 +19,7 @@ function Cart() {
   const cart = useCart();
 
   return (
-    <main className=" flex-1 flex flex-col md:flex-row gap-4 p-4 md:gap-8 md:p-6 lg:gap-12 bg-gray-100 border-b dark:bg-gray-950 ">
+    <main className=" flex-1 flex flex-col md:flex-row gap-4 p-4 md:gap-8 md:p-6 lg:gap-1">
       <div className="flex-1 grid gap-4 ">
         <div className="flex items-center gap-4">
           <h1 className="font-semibold text-lg md:text-xl">Your Items</h1>
@@ -56,7 +56,7 @@ function Cart() {
             </div>
           ))}
         </div>
-        <Card className="p-4 bg-gray-100 border-b border-gray-200 dark:border-gray-800 dark:bg-gray-950">
+        <Card className="p-4 ">
           {cart.items.length > 0 ? (
             <>
               <CardTitle className="font-semibold text-lg md:text-xl mb-3">
@@ -88,11 +88,13 @@ function Cart() {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="flex gap-4">
-                <Button asChild className="w-full">
+              <CardFooter className="flex justify-between">
+                <Button asChild variant={"outline"}>
                   <Link href="/">Continue Shopping</Link>
                 </Button>
-                <Button className="w-full">Checkout</Button>
+                <Button asChild size={"lg"} className="w-64">
+                  <Link href="/checkout">Checkout</Link>
+                </Button>
               </CardFooter>
             </>
           ) : (

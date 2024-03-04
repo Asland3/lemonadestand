@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import cocktailsData from "@/lib/cocktials.json";
 import useCart from "@/hooks/use-cart";
+import { SelectSeparator } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   const [cocktails, setCocktails] = useState<CocktailsModel[]>([]);
@@ -23,7 +25,7 @@ export default function Home() {
 
   return (
     <main className="flex-1">
-      <div className="bg-gray-100 border-b border-gray-200 dark:border-gray-800 dark:bg-gray-950">
+      <div className="">
         <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-20 lg:items-center lg:justify-between">
             <div>
@@ -62,7 +64,9 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex justify-center bg-gray-100 py-12 dark:bg-gray-950 lg:px-6">
+      <Separator className="my-4" />
+
+      <div className="flex justify-center py-12  lg:px-6">
         <div id="cocktails" className="grid grid-cols-1 md:grid-cols-3 gap-32 ">
           {cocktails.map((cocktail) => (
             <div key={cocktail.idDrink} className="flex flex-col gap-5">
