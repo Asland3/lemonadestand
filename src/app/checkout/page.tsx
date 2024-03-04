@@ -31,9 +31,10 @@ import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/use-cart";
 import useOrder from "@/hooks/order-store";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function Checkout() {
-  const router = useRouter()
+  const router = useRouter();
   const cart = useCart();
   const order = useOrder();
 
@@ -178,7 +179,9 @@ function Checkout() {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Abort</AlertDialogCancel>
-                <AlertDialogAction>Continue</AlertDialogAction>
+                <AlertDialogAction asChild>
+                  <Link href="/">Continue</Link>
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
@@ -188,7 +191,7 @@ function Checkout() {
             onClick={() => {
               order.addOrder(cart.totalPrice());
               cart.removeAll();
-              router.push("/");
+              router.push("/confirmation");
             }}
           >
             Pay ${cart.totalPrice().toFixed(2)}
