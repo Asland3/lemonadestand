@@ -65,7 +65,7 @@ function Cart() {
 
               <CardContent className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
-                  <div>Subtotal{}</div>
+                  <div>Subtotal</div>
                   <div className="font-semibold">
                     ${cart.subTotal().toFixed(2)}
                   </div>

@@ -1,5 +1,15 @@
 "use client";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   CardTitle,
   CardDescription,
@@ -19,17 +29,19 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/use-cart";
+import useOrder from "@/hooks/order-store";
+import { useRouter } from "next/navigation";
 
 function Checkout() {
+  const router = useRouter()
   const cart = useCart();
+  const order = useOrder();
 
   return (
     <Card>
       <CardHeader>
         <CardTitle className="text-xl">Shipping information</CardTitle>
-        <CardDescription>
-          Enter your shipping address and payment information
-        </CardDescription>
+        <CardDescription>Enter your shipping address</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4 md:gap-6">
         <div className="grid gap-4 md:grid-cols-2">
@@ -78,7 +90,7 @@ function Checkout() {
             <Label className="text-sm" htmlFor="country">
               Country/Region
             </Label>
-            <Select defaultValue="usa" id="country">
+            <Select defaultValue="usa">
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a country" />
               </SelectTrigger>
@@ -117,32 +129,69 @@ function Checkout() {
             Order Summary
           </Label>
           {cart.items.map((item) => (
-            <div className="grid gap-2 text-sm" key={item.idDrink}>
+            <div className="grid gap-2" key={item.idDrink}>
               <div className="flex items-center justify-between">
-                <div>Old Fashioned (x2)</div>
-                <div>$20.00</div>
+                <div className="">
+                  {item.strDrink} <span>x {item.quantity}</span>
+                </div>
+                <div className="font-semibold">${item.strPrice}</div>
               </div>
-              {/* <div className="flex items-center justify-between">
-                <div>Manhattan (x1)</div>
-                <div>$10.00</div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div>Shipping</div>
-                <div>$5.00</div>
-              </div>
-              <div className="flex items-center justify-between font-medium">
-                <div>Total</div>
-                <div>$35.00</div>
-              </div> */}
             </div>
           ))}
         </div>
-        
+
+        <Separator />
+
+        <div className="flex flex-col gap-2">
+          <div className="flex justify-between">
+            <div>Subtotal</div>
+            <div className="font-semibold">${cart.subTotal().toFixed(2)}</div>
+          </div>
+          <div className="flex justify-between">
+            <div>Shipping</div>
+            <div className="font-semibold">
+              ${cart.shippingCost().toFixed(2)}
+            </div>
+          </div>
+          <div className="flex justify-between">
+            <div>Tax</div>
+            <div className="font-semibold">${cart.tax().toFixed(2)}</div>
+          </div>
+          <div className="flex justify-between">
+            <div>Total</div>
+            <div className="font-semibold">${cart.totalPrice().toFixed(2)}</div>
+          </div>
+        </div>
 
         <div className="flex justify-between">
-          <Button variant={"outline"}>Cancel</Button>
-          <Button size={"lg"} className="w-64">
-            Pay $35.00
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant={"outline"}>Cancel</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action will cancel your order and take you back the the
+                  front page.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Abort</AlertDialogCancel>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          <Button
+            size={"lg"}
+            className="w-64"
+            onClick={() => {
+              order.addOrder(cart.totalPrice());
+              cart.removeAll();
+              router.push("/");
+            }}
+          >
+            Pay ${cart.totalPrice().toFixed(2)}
           </Button>
         </div>
       </CardContent>
